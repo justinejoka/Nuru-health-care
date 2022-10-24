@@ -1,0 +1,138 @@
+.container-client{
+    display: grid;
+    grid-template-columns: 0.7fr 4fr;
+    gap: 2em;
+  }
+  .side-bar{
+    background-color: whitesmoke;
+    height: auto;
+  }
+  .logo{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .logo-image{
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background-color: black;
+    margin-top: 5px;
+    margin-left: 10px;
+    
+  }
+  .logo img{
+    object-fit: cover;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    
+  }
+  .logo-head{
+    display: flex;
+    flex-direction: row;
+  }
+  .h-color h4{
+    color: aqua;
+  }
+  .childs-name {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #dddddd;
+    
+  
+  }
+  .main-menu{
+    padding-top: 30px;
+    
+  }
+  h4 i {
+    color: rgb(59, 59, 59);
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .fade{
+    color: #dddddd;
+  }
+  a{
+    text-decoration: none;
+    color: rgb(59, 59, 59);
+  }
+  .heading{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 250px;
+  }
+  .head1 {
+    display: flex;
+    flex-direction: column;
+    gap: 8em;
+  }
+  .headp h3{
+  
+  }
+  .headl h3{
+    
+    color: aqua;
+  }
+  .head2{
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      
+      
+  }
+  .head2 a{
+    width: 150px;
+    height: 30px;
+    margin-left: auto;
+    margin-bottom: 10px;
+    color: whitesmoke;
+    background-color: aqua;
+    border: none;
+  }
+  .head2 button{
+      width: 150px;
+      height: 30px;
+      margin-left: auto;
+      margin-bottom: 10px;
+      color: whitesmoke;
+      background-color: aqua;
+      border: none;
+  }
+  .head2 button{
+      width: 150px;
+      height: 30px;
+      margin-left: auto;
+      margin-bottom: 10px;
+      color: whitesmoke;
+      background-color: aqua;
+      border: none;
+  }
+  .head2 button:hover{
+    background-color: #dddddd;
+  }
+  .head2 input{
+      width: 350px;
+      height: 25px;
+      margin-left: auto;
+      margin-bottom: 10px;
+  } 
+  .frm{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  .frm input{
+    width: 350px;
+  }
+  .frm textarea{
+   width: 300px;
+  }
+  .frm button{
+    width: 100px;
+  }
