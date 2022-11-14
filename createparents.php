@@ -1,6 +1,8 @@
 <?php
 
-include 'connect.php'; 
+include 'connect.php';
+session_start ();
+
 if(isset($_POST['submit'])){
   $name=$_POST['name'];
   $contact=$_POST['contact'];
@@ -24,21 +26,21 @@ if(isset($_POST['submit'])){
 
 if(isset($_POST['add'])){
   $name=$_POST['name'];
+  $parentid=$_POST['parentid'];
   $birthday=$_POST['birthday'];
   $gender=$_POST['gender'];
   //$gender=$_POST['Female'];
 
-  $sql="insert into `children` (name,birthday,gender)
-  values('$name','$birthday','$gender')"; 
+  $sql="insert into `children` (name,parentid,birthday,gender)
+  values('$name','$parentid','$birthday','$gender')"; 
   $result=mysqli_query($con,$sql); 
   if($result){
-    //echo "Data inserted successfully";
-    header('location:createparents.php');
+    echo "Data inserted successfully";
+    
   }else{
     die(mysqli_error($con)); 
   }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -52,10 +54,11 @@ if(isset($_POST['add'])){
 
   <link rel="stylesheet" href="https://fontawesome.com/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <title>Create parents</title>
 </head>
 
-<body>
+<body onload="document.form1.email.focus()">
   <div class="container-client">
     
       <div class="side-bar">
@@ -73,8 +76,13 @@ if(isset($_POST['add'])){
         </div>
 
         <div class="childs-name">
-          <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h4>Justin Joka</h4>
+        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+
+<h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
         </div>
 
         <div class="main-menu">
@@ -96,7 +104,7 @@ if(isset($_POST['add'])){
     
       <div class="side2">
       <div class="heading">
-            <h3>Parents</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
@@ -107,28 +115,34 @@ if(isset($_POST['add'])){
         <div class="parent-ch">
           <div class="parents-info">
             <h3>Parents Information</h3>
-            <form method="post" action="">
-              <label for="">Name</label>
-              <input type="text" class="form-control" placeholder="Enter your name" name="name">
-             <!-- <label for="">Last Name</label>
-              <input type="text">
+            <form id="myform" name="form1" method="post" action="">
+              <label for="">First Name</label>
+              <input type="text" class="form-control" placeholder="Enter your First Name" name="name" required>
+              <!--<label for="">Last Name</label>
+              <input type="text" class="form-control" placeholder="Enter your Last Name" name="name" required>
               <label for="">Birthday</label>
               <input type="date">-->
               <label for="">Contact No</label>
-              <input type="number" class="form-control" placeholder="Enter your number" name="contact">
+              <input type="tel" id="myform_phone" placeholder="Enter your number" name="contact"
+       pattern="[[0-9]{10}" 
+       required>
+              
               <label for="">Email</label>
-              <input type="email"class="form-control" placeholder="Enter your email" name="email">
-              <button name="submit">Add</button>
+              <input type="email"class="form-control" placeholder="Enter your email" name="email" onkeyup="return validateEmail()" required>
+              <button name="submit" 
+             >Add</button>
             </form>
             
           </div>
           <div class="childs-info">
             <h3>Add Children</h3>
-            <form method='post' action="">
+            <form method='post' action="" name="form2">
               <label for="">Name</label>
-              <input type="text" placeholder="Enter your name" name="name">
+              <input type="text" placeholder="Enter your name" name="name" >
+              <label for="">ParentId</label>
+              <input type="text" placeholder="Enter Parent Id" name="parentid">
               <label for="">Birthday</label>
-              <input type="date"  name="birthday">
+              <input type="date"  name="birthday" id="dateControl">
               
               <label for="">Gender</label>
                 <label for="">
@@ -142,14 +156,15 @@ if(isset($_POST['add'])){
             
 
            
-              <button name="add">Add</button>
+              <button name="add" >Add</button>
             </form>
             
           </div>
           </div>
           <div>
           <table>
-            <h3>Children list<h3>
+            
+              <caption><b>Children list</b></caption>
             <tr>
               <th>#</th>
               <th>NAME</th>
@@ -198,6 +213,26 @@ deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>
         </div>
     
   </div>
+
+  <script src="validation.js"></script>
+  <script>
+  $(document).ready(function() {
+
+var dtToday = new Date ();
+
+var month = dtToday.getMonth() + 1;
+var day = dtToday.getDate ();
+var year = dtToday.getFullYear();
+if(month < 10)
+month = '0' + month.toString();
+if(day < 10)
+day = '0' + day.toString();
+
+var maxDate = year + '-' + month + '-' + day;
+$('#dateControl').attr('max', maxDate);
+
+});
+</script>
 </body>
 
 </html>

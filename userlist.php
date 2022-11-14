@@ -1,6 +1,7 @@
 <?php
 
 include 'connect.php';
+session_start ();
 
 ?>
 
@@ -35,8 +36,14 @@ include 'connect.php';
       </div>
 
       <div class="childs-name">
-        <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-        <h4>Justin Joka</h4>
+      <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+     
+
+<h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
       </div>
 
       <div class="main-menu">
@@ -56,7 +63,7 @@ include 'connect.php';
 
     <div class="side2">
     <div class="heading">
-            <h3>Users</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
@@ -66,10 +73,11 @@ include 'connect.php';
 
         <table>
         <div class="head2">
-          <a href="usercreate.php"><button>+Create New</button></a>
+          <a href="usercreate.php"><button><i class="fa fa-plus fa-1x aria-hidden="true"></i>Create</button></a>
           <input type="search" placeholder="search user" name="" id="">
         </div>
-        <h3>List of users</h3>
+        
+        <caption><b>List of users</b></caption>
           <tr>
             <th>#</th>
             <th>Name</th>
@@ -97,9 +105,9 @@ if($result){
           <td>'.$role.'</td>
           <td>
 
-<button><a href="update.php?
+<button><a href="userupdate.php?
 updateid='.$id.'"><i class="fa fa-pencil"></i></a></button> 
-<button><a href="delete.php?
+<button><a href="userdelete.php?
 deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>  
 </td>
 

@@ -1,19 +1,23 @@
 <?php
 
 include 'connect.php'; 
+session_start ();
+
 if(isset($_POST['submit'])){
+
   $name=$_POST['name'];
   $tittle=$_POST['tittle'];
-  $attendance=$_POST['attendance'];
-  $date=$_POST['date'];
-  $description=$_POST['description'];
+  $schedule=$_POST['schedule'];
+  $attendance=$_POST['parrentattendance'];
+  
+  
   
 
-  $sql="insert into `immunisation-details` (name,tittle, attendance,date,description)
-  values('$name','$tittle','$attendance','$date','$description')"; 
+  $sql="insert into `attendees` (name,tittle, schedule,parrentattendance)
+  values('$name','$tittle','$schedule','$attendance')"; 
   $result=mysqli_query($con,$sql); 
   if($result){
-    //echo "Data inserted successfully";
+    echo "Data inserted successfully";
     //header('location:immunisationschedule.php');
   }else{
     die(mysqli_error($con)); 
@@ -30,7 +34,7 @@ if(isset($_POST['submit'])){
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=, initial-scale=1.0">
-  <link rel="stylesheet" href="parents.css">
+  <link rel="stylesheet" href="dead.css">
 
   <link rel="stylesheet" href="https://fontawesome.com/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,7 +60,13 @@ if(isset($_POST['submit'])){
         </div>
         <div class="childs-name">
           <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h3>Child's Name</h3>
+         
+
+     <h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
         </div>
         <div class="main-menu">
           <h4 class="fade">Main Menu</h4>
@@ -68,26 +78,25 @@ if(isset($_POST['submit'])){
     
       <div class="side2">
       <div class="heading">
-            <h3>My immunisation schedule</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
            <!-- <img src="images\julien-flutto-HPha3t0r4MU-unsplash.jpg" alt="" height="100px" width="100px">-->
       </div>
+      
       <form method='post' action="">
-        <div class="detailsf">
-            <h3>schedule details</h3>
-            <h3>childs-name</h3>
-            <input type="text" name="name">
+        <div class="form">
+            <h3>Name</h3>
+            <input type="text" name="name" placeholder="Enter your name">
             <h3>Tittle</h3>
-            <input type="text" name="tittle">
-            <h3>Description</h3>
-            <textarea name="description" id=""></textarea>
+            <input type="text" name="tittle" placeholder="Enter vaccine">
+            
             <h3>Schedule</h3>
-            <input type="date" name="date">
+            <input type="date" name="schedule">
          
             <h3>Enter Attendance Including Infants</h3>
-            <input type="text" name="attendance">
+            <input type="text" name="parrentattendance" placeholder="Enter Attendees">
             <button name="submit">Confirm Attendance</button>
         </div>
         </form>

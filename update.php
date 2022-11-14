@@ -1,6 +1,8 @@
 <?php
 
 include 'connect.php'; 
+session_start ();
+
 $id=$_GET['updateid'];
 $sql="select * from `parents` where id=$id";
 $result=mysqli_query($con,$sql); 
@@ -36,6 +38,9 @@ if(isset($_POST['submit'])){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="dead.css">
   <title>Create parents</title>
+
+  <link rel="stylesheet" href="https://fontawesome.com/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -56,8 +61,14 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class="childs-name">
-          <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h4>Justin Joka</h4>
+        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+      
+
+          <h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
         </div>
 
         <div class="main-menu">
@@ -83,9 +94,7 @@ if(isset($_POST['submit'])){
             <div class="headp">
 
             </div>
-            <div class="headl">
-              <h3>Parents</h3>
-            </div>
+         
 
           </div>
 
@@ -95,7 +104,7 @@ if(isset($_POST['submit'])){
           <div class="parents-info">
             <h3>Parents Information</h3>
             <form method="post" action="">
-              <label for="">First Name</label>
+              <label for="">Name</label>
               <input type="text" class="form-control" 
               placeholder="Enter your name" name="name" 
               value=<?php echo $name;?> >

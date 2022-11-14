@@ -1,6 +1,7 @@
 <?php
 
 include 'connect.php';
+session_start ();
 
 ?>
 
@@ -37,12 +38,17 @@ include 'connect.php';
         </div>
 
         <div class="childs-name">
-          <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h4>Justin Joka</h4>
+        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+       
+ <h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
         </div>
 
         <div class="main-menu">
-          <h4><i class="fa fa-lemon-o" aria-hidden="true"></i><a href=""> Dashboard</a></h4>
+          <h4><i class="fa fa-lemon-o" aria-hidden="true"></i><a href="dashboard.php"> Dashboard</a></h4>
           <h4 class="fade">Main Menu</h4>
           <h4><i class="fa fa-user-o" aria-hidden="true"></i><a href="parents.php"> Parents</a></h4>
           <h4><i class="fa fa-list-alt" aria-hidden="true"></i><a href="immunisationschedule.php"> Immunisation Schedule</a></h4>
@@ -59,7 +65,7 @@ include 'connect.php';
     
       <div class="side2">
       <div class="heading">
-            <h3>immunisation schedule</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
@@ -67,12 +73,13 @@ include 'connect.php';
       </div>
           <table>
           <div class="head2">
-            <a href="newschedule.php"><button>+New Schedule</button></a>
+            <a href="newschedule.php"><button><i class="fa fa-plus fa-1x aria-hidden="true"></i>Create</button></a>
             <input type="search" placeholder="search parents" name="" id="">
           </div>
-          <h3>List of Schedules</h3>
+      
+          <caption><b>List of Schedules</b></caption>
             <tr>
-              <th>#</th>
+              <th>NO</th>
               <th>TITTLE</th>
               <th>DESCRIPTION</th>
               <th>SCHEDULE</th>
@@ -99,10 +106,10 @@ if($result){
           <td>'.$schedule.'</td>
           <td>
 
-<button><a href="update.php?
-updateid='.$id.'"><i class="fa fa-pencil"></i></a></button> 
+
 <button><a href="deleteimmunisation.php?
-deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>  
+deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>
+<button><a href="attendees.php"><i class="fa fa-eye" aria-hidden="true"></i></a></button>    
 </td>
 
         </tr>

@@ -36,8 +36,17 @@ include 'connect.php';
 
         </div>
         <div class="childs-name">
-          <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h3>Child's Name</h3>
+        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+          <?php 
+       $sel = "select * from userz ";
+			 $query = mysqli_query($con, $sel);
+       $result = mysqli_fetch_assoc($query);
+       ?>
+
+        <h4><?php  echo $result['user_name']; ?></h4>
+        
+        
+        <a href="logout.php">Logout</a>
         </div>
         <div class="main-menu">
           <h4 class="fade">Main Menu</h4>
@@ -49,16 +58,17 @@ include 'connect.php';
     
       <div class="side2">
       <div class="heading">
-            <h3>My immunisation schedule</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
            <!-- <img src="images\julien-flutto-HPha3t0r4MU-unsplash.jpg" alt="" height="100px" width="100px">-->
       </div>
           <table>
-          <h3>List of schedules<h3>
+          
+            <caption><b>List of schedules</b></caption>
             <tr>
-              <th>#</th>
+              <th>NO</th>
               <th>TITTLE</th>
               <th>DESCRIPTION</th>
               <th>SCHEDULE</th>
@@ -86,10 +96,8 @@ if($result){
           <td>'.$schedule.'</td>
           <td>
 
-<button><a href="update.php?
-updateid='.$id.'"><i class="fa fa-pencil"></i></a></button> 
-<button><a href="delete.php?
-deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>  
+<button><a href="confirm.php">View Details</a></button> 
+ 
 </td>
 
         </tr>

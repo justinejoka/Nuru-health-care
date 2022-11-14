@@ -1,6 +1,8 @@
 <?php
 
-include 'connect.php'; 
+include 'connect.php';
+session_start ();
+
 if(isset($_POST['submit'])){
   $name=$_POST['name'];
   $email=$_POST['email'];
@@ -50,8 +52,14 @@ if(isset($_POST['submit'])){
       </div>
 
       <div class="childs-name">
-        <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-        <h4>Justin Joka</h4>
+      <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+        
+
+<h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
       </div>
 
       <div class="main-menu">
@@ -70,7 +78,7 @@ if(isset($_POST['submit'])){
     </div>
     <div class="side2">
     <div class="heading">
-            <h3>Users</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
@@ -84,9 +92,9 @@ if(isset($_POST['submit'])){
         <label for="">Email</label>
         <input type="email" name="email" id="" placeholder="Enter your email">
         <label for="">password</label>
-        <input type="password" name="" id="">
+        <input type="password" name="" id="" placeholder="Enter your password">
         <label for="">Confirm password</label>
-        <input type="password" name="" id="">
+        <input type="password" name="" id="" placeholder="Enter your password">
         <label for="">select roles</label>
         
           <label for="">Admin

@@ -14,28 +14,7 @@ session_start();
 		$user_name = mysqli_real_escape_string($con, $_POST['user_name']);
 		$password = mysqli_real_escape_string($con, $_POST['password']);
 
-    if(!empty($password) && $password != "" ){
-
-      /*if (strlen($password) <= '8') {
-          echo "Your Password Must Contain At Least 8 Digits !"."<br>";
-      }*/
-      if(!preg_match("#[0-9]+#",$password)) {
-          echo "Your Password Must Contain At Least 1 Number !"."<br>";
-      }
-      elseif(!preg_match("#[A-Z]+#",$password)) {
-          echo "Your Password Must Contain At Least 1 Capital Letter !"."<br>";
-      }
-      elseif(!preg_match("#[a-z]+#",$password)) {
-          echo "Your Password Must Contain At Least 1 Lowercase Letter !"."<br>";
-      }
-      elseif(!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $password)) {
-          echo "Your Password Must Contain At Least 1 Special Character !"."<br>";
-      }
-  }else{
-      echo "Please Enter your password"."<br>";
-  }
-
-		/*if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
+		if(!empty($user_name) && !empty($password) && !is_numeric($user_name))
 		{
 
 			//save to database
@@ -48,7 +27,7 @@ session_start();
 		}else
 		{
 			echo "Please enter some valid information!";
-		}*/
+		}
 	}
 ?>
 
@@ -84,19 +63,28 @@ session_start();
         <h3>Register</h3>
         <hr>
         <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="user_name" value="" id="usrname"><br>
+        <input type="text" placeholder="Enter Username" name="user_name" value="" ><br>
         <hr>
 
         <label for="psw" ><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="usrname"><br>
+        <input type="password" placeholder="Enter Password" name="password" id="password"  onkeyup="return validate()" required><br>
         <hr>
-       
+        <div class="error">
+        <ul>
+          <li id='upper'>Atleast one uppercase</li>
+          <li id='lower'>Atleast one lowercase</li>
+          <li id='special_char'>Atleast one special character</li>
+          <li id='number'>Atleast one number</li>
+          <li id='length'>Atleast 6 characters</li>
+        </ul>
+      </div>
+      <hr>
 
         <button type="submit" class="submt" name="reg_user">Register</button>
-        <br><br><br>
-        <label>
-          <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label><br><br><br><br><br>
+        <br>
+        <label><br>
+          
+        </label><br>
           
        
         <p>Already have an account? <a href="login.php">Sign in</a></p>
@@ -108,6 +96,7 @@ session_start();
   </div>
 
   </div>
+  <script src="validation.js"></script>
 </body>
 
 </html>

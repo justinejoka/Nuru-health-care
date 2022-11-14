@@ -1,7 +1,7 @@
 <?php
 
 include 'connect.php';
-
+session_start();
 ?>
 
 
@@ -37,8 +37,9 @@ include 'connect.php';
 
         </div>
         <div class="childs-name">
-          <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-          <h3>Child's Name</h3>
+        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+          <h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
         </div>
         <div class="main-menu">
           <h4 class="fade">Main Menu</h4>
@@ -50,17 +51,25 @@ include 'connect.php';
     
       <div class="side2">
       <div class="heading">
-            <h3>My immunisation schedule</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
            <!-- <img src="images\julien-flutto-HPha3t0r4MU-unsplash.jpg" alt="" height="100px" width="100px">-->
       </div>
+
+      <div id="myProgress">
+        
+        <caption><b>MY IMMUNISATION PROGRESS</b></caption>
+        <div id="myBar" aria-precentnow="0" aria-precentmin="0" aria-precentmax="100" ></div>
+      </div>
+      <button onclick="increase()">Click</button>
       <table>
          
-          <h3>my Schedule</h3>
+          
+          <caption><b>my Schedule</b></caption>
             <tr>
-              <th>#</th>
+              <th>NO</th>
               <th>TITTLE</th>
               <th>DESCRIPTION</th>
               <th>SCHEDULE</th>
@@ -87,8 +96,8 @@ if($result){
           <td>'.$schedule.'</td>
           <td>
 
-<button><a href=""> Confirm</a></button> 
-<button><a href="">Cancel</a></button>  
+<button><a href="confirm.php"> Confirm</a></button> 
+<button><a href="cancel.html">Cancel</a></button>  
 </td>
 
         </tr>
@@ -105,7 +114,48 @@ if($result){
       </div>
     
   </div>
+<script>
+  /*var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 1;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}*/
 
+function value() {
+  var x = document.getElementById("myBar").getAttribute("aria-precentnow");
+  return x;
+}
+
+function rvalue(precent) {
+  document.getElementById("myBar").setAttribute("aria-precentnow", precent);
+  document.getElementById("myBar").setAttribute("style", "width: " + precent + "%;");
+  document.getElementById("myBar").innerHTML = (precent + "%");
+}
+
+
+function increase() {
+  var i = value();
+  if (i <= 100) {
+    i++;
+    rvalue(i+7.6);
+  } else {
+    alert("Congrats you hit 100%");
+  }
+}
+</script>
 </body>
 
 </html>

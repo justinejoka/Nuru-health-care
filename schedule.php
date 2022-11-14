@@ -1,6 +1,8 @@
 <?php
 
 include 'connect.php'; 
+session_start ();
+
 if(isset($_POST['submit'])){
   $tittle=$_POST['tittle'];
   $description=$_POST['description'];
@@ -50,8 +52,14 @@ if(isset($_POST['submit'])){
 
             </div>
             <div class="childs-name">
-                <i class="fa fa-user-o fa-5x" aria-hidden="true"></i>
-                <h3>Child's Name</h3>
+            <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+       
+
+<h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
+        <a href="logout.php">Logout</a>
             </div>
             <div class="main-menu">
                 <h4 class="fade">Main Menu</h4>
@@ -63,7 +71,7 @@ if(isset($_POST['submit'])){
 
         <div class="side2">
         <div class="heading">
-            <h3>My immunisation schedule</h3>
+            
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>

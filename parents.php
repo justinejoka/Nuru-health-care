@@ -1,17 +1,10 @@
 <?php
 
 include 'connect.php';
+session_start ();
 
 ?>
-<?php 
-session_start();
 
-	include("connect.php");
-	include("functions.php");
-
-	$user_data = check_login($con);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,15 +35,21 @@ session_start();
           </div>
         </div>
       </div>
-
+     
       <div class="childs-name">
-        <i class="fa fa-user-o fa-2x" aria-hidden="true"></i>
-        <h4><?php echo $user_data['user_name']; ?></h4>
+      <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>
+       
+
+<h4><?php if (isset($_SESSION['user_name'])) echo $_SESSION['user_name']; ?></h4>
+        
+        
+        
         <a href="logout.php">Logout</a>
       </div>
+      
 
       <div class="main-menu">
-        <h4><i class="fa fa-lemon-o" aria-hidden="true"></i><a href=""> Dashboard</a></h4>
+        <h4><i class="fa fa-lemon-o" aria-hidden="true"></i><a href="dashboard.php"> Dashboard</a></h4>
         <h4 class="fade">Main Menu</h4>
         <h4><i class="fa fa-user-o" aria-hidden="true"></i><a href="parents.php"> Parents</a></h4>
         <h4><i class="fa fa-list-alt" aria-hidden="true"></i><a href="immunisationschedule.php"> Immunisation Schedule</a></h4>
@@ -66,7 +65,6 @@ session_start();
 
     <div class="side2">
       <div class="heading">
-            <h3>Parents</h3>
             <div class="headp">
               <h1>Vaccinations for <br> babies and children</h1>
             </div>
@@ -76,12 +74,12 @@ session_start();
       <table>
         
         <div class="head2">
-          <a href="createparents.php"><button>+Create New</button></a>
+          <a href="createparents.php"><button><i class="fa fa-plus fa-1x aria-hidden="true"></i>Create</button></a>
           <input type="search" placeholder="search parents" name="" id="">
         </div>
-        <h3>List of Parents<h3>
+        <caption><b>List of Parents</b></caption>
         <tr>
-          <th>#</th>
+          <th>NO</th>
           <th>NAME</th>
           <th>EMAIL</th>
           <th>CONTACT NO</th>
@@ -107,10 +105,11 @@ if($result){
           <td>'.$contact.'</td>
           <td>
 
-<button><a href="update.php?
+<button class="edit"><a href="update.php?
 updateid='.$id.'"><i class="fa fa-pencil"></i></a></button> 
-<button><a href="delete.php?
-deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button>  
+<button class="delete"><a href="delete.php?
+deleteid='.$id.'"><i class="fa fa-trash-o"></i></a></button> 
+ 
 </td>
 
         </tr>
